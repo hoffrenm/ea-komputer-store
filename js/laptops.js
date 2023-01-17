@@ -2,6 +2,10 @@ const baseUrl = "https://hickory-quilled-actress.glitch.me";
 let laptops = [];
 let price = 0;
 
+/*
+  Invokes fetching for laptops. Successful fetch adds them to selection element
+  and updates ui to show information of first laptop.
+*/
 (async function () {
   try {
     const response = await fetch(`${baseUrl}/computers`)
@@ -14,8 +18,10 @@ let price = 0;
   }
 })();
 
+// Returns price of currently selected laptop.
 const getSelectedLaptopPrice = () => price
 
+// Loops over laptop array and adds them to the selection.
 const addLaptopsToSelection = (laptopArray) => {
   laptopArray.forEach(laptop => {
     const laptopElement = document.createElement('option')
@@ -25,17 +31,20 @@ const addLaptopsToSelection = (laptopArray) => {
   })
 }
 
+// Handles change in laptop selection element.
 const handleLaptopSelectionChange = e => {
   const selectedLaptop = laptops.find(laptop => laptop.id == e.target.value)
   updateLaptopInfo(selectedLaptop)
 }
 
+// Updates both features list and information section based on selected laptop.
 const updateLaptopInfo = (laptop) => {
   price = laptop.price
   setFeatures(laptop)
   setInfoSection(laptop)
 }
 
+// Sets laptop feature list into laptop selection element.
 const setFeatures = (laptop) => {
   laptopFeaturesElement.textContent = ''
   laptop.specs.forEach(spec => {
@@ -45,6 +54,7 @@ const setFeatures = (laptop) => {
   })
 }
 
+// Sets laptop information into laptop information section.
 const setInfoSection = (laptop) => {
   laptopTitleElement.innerText = laptop.title
   laptopDescriptionElement.innerText = laptop.description

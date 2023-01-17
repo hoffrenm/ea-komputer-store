@@ -1,13 +1,15 @@
-import work from './js/work.js'
-import bank from './js/bank.js'
-import laptop from './js/laptops.js'
-import { renderValueAsCurrency } from './js/utils.js'
+import work from './work.js'
+import bank from './bank.js'
+import laptop from './laptops.js'
+import { renderValueAsCurrency } from './utils.js'
 
+// Earns money.
 const earn = () => {
   work.goToWork()
   updateEarnings()
 }
 
+// Transfers earned money into bank balance.
 const depositEarnings = () => {
   const earnings = work.withdraw()
   bank.deposit(earnings)
@@ -16,6 +18,10 @@ const depositEarnings = () => {
   updateLoan()
 }
 
+/* 
+  Prompts user to enter value and attempts to loan money. Loan must be positive and 
+  maximum two times the current bank balance otherwise user is informed about failed loan.
+*/
 const getLoan = () => {
   const amount = Number(window.prompt("Enter loan amount"))
 
@@ -28,6 +34,7 @@ const getLoan = () => {
   updateBalance()
 }
 
+// Pays loan with full pay balance.
 const payLoan = () => {
   bank.payLoan(work.withdraw())
   updateEarnings()
@@ -35,6 +42,10 @@ const payLoan = () => {
   updateLoan()
 }
 
+/*
+  Attemps to buy a currently selected laptop. User will be informed
+  if bank balance was enough to make a purchase.
+*/
 const buyLaptop = () => {
   const price = laptop.getSelectedLaptopPrice()
 

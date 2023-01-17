@@ -8,6 +8,10 @@ const withdraw = amount => {
   balance -= amount
 }
 
+/*
+  Adds money to bank balance and makes deduction
+  from outstanding loan if one exists.
+*/
 const deposit = amount => {
   if (loan > 0) {
     balance += loanDeduction(amount)
@@ -16,6 +20,10 @@ const deposit = amount => {
   }
 }
 
+/*
+  Deducts loan by 10% of given amount and returns
+  90% plus any surplus when leftover loan amount was less than deduction.
+*/
 const loanDeduction = (amount) => {
   const deduction = amount * 0.1
   const toBalance = amount - deduction
@@ -35,6 +43,10 @@ const loanMoney = amount => {
   loan += amount
 }
 
+/*
+  Pays loan with full amount. Any suprlus will be
+  transferred to the balance.
+*/
 const payLoan = (amount) => {
   if (loan <= 0) return
 
